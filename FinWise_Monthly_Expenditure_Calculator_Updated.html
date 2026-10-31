@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinWise | Monthly Money Planner</title>
+<style>
+:root{--ink:#17243b;--muted:#718096;--bg:#f4f7fb;--card:#fff;--line:#e7edf4;--navy:#182b49;--blue:#4776e6;--mint:#dff7ee;--green:#16845b;--red:#d94b55;--amber:#e9a23b;--shadow:0 12px 35px rgba(31,52,83,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,Segoe UI,Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{background:var(--navy);color:#fff;padding:28px 18px;display:flex;flex-direction:column;gap:28px}.brand{display:flex;align-items:center;gap:11px;font-size:21px;font-weight:800;letter-spacing:.2px;padding:0 10px}.brand-mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,#7be0c3,#4d85ef);display:grid;place-items:center;color:#142644;font-weight:900}.nav-label{font-size:10px;letter-spacing:1.7px;color:#9eacc1;padding:0 12px;margin:6px 0}.nav button{width:100%;text-align:left;background:transparent;color:#c5d0df;padding:12px;border-radius:10px;margin:3px 0}.nav button.active,.nav button:hover{background:#2b4163;color:#fff}.side-note{margin-top:auto;background:#223a5e;padding:16px;border-radius:14px;color:#dbe6f4;font-size:12px}.side-note strong{display:block;color:#fff;margin-bottom:5px}.main{padding:30px 36px 50px;max-width:1500px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:26px}.eyebrow{color:var(--blue);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.topbar h1{font-size:28px;margin:4px 0 0;letter-spacing:-.8px}.profile{display:flex;align-items:center;gap:10px;background:#fff;padding:8px 13px;border:1px solid var(--line);border-radius:14px}.avatar{width:36px;height:36px;border-radius:50%;background:#e7efff;color:#315ab6;display:grid;place-items:center;font-weight:800}.profile small{display:block;color:var(--muted);font-size:11px}.month-tools{display:flex;gap:10px;align-items:center}.month-tools input{width:auto}.input,select{width:100%;padding:11px 12px;border:1px solid #dce4ee;border-radius:9px;background:#fff;color:var(--ink);outline:none}.input:focus,select:focus{border-color:#7798ef;box-shadow:0 0 0 3px #4776e61c}.btn{padding:10px 15px;border-radius:9px;font-weight:700}.primary{background:var(--blue);color:#fff}.secondary{background:#edf2ff;color:#345fbe}.danger{background:#fff0f0;color:#bf414b}.grid{display:grid;gap:17px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:19px;box-shadow:var(--shadow)}.kpi-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.kpi-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#edf2ff;color:#4169cf;font-size:17px}.kpi-value{font-size:25px;font-weight:800;margin:10px 0 3px;letter-spacing:-.7px}.kpi-sub{font-size:11px;color:var(--muted)}.good{color:var(--green)!important}.bad{color:var(--red)!important}.mid{color:#ad741d!important}.two-col{grid-template-columns:1.25fr .75fr;margin-bottom:18px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.section-head h2{font-size:16px;margin:0}.section-head p{margin:3px 0 0;color:var(--muted);font-size:11px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:#506078}.field.full{grid-column:1/-1}.helper{font-size:11px;color:var(--muted);margin-top:5px}.expense-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.expense-grid .field label{font-size:11px}.expense-grid input{padding:10px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.chart-wrap{height:230px;display:flex;align-items:center;gap:25px}.donut{width:190px;height:190px;border-radius:50%;position:relative;flex:none;background:conic-gradient(#4776e6 0 30%,#2bb98a 30% 50%,#f2b84b 50% 68%,#8a72d6 68% 83%,#e87979 83% 100%)}.donut:after{content:"";position:absolute;inset:35px;background:#fff;border-radius:50%}.donut-center{position:absolute;inset:0;z-index:1;display:grid;place-content:center;text-align:center}.donut-center strong{font-size:18px}.donut-center span{font-size:10px;color:var(--muted)}.legend{display:grid;gap:9px;width:100%}.legend-row{display:flex;justify-content:space-between;gap:8px;font-size:12px}.legend-name{display:flex;align-items:center;gap:7px;color:#53627a}.dot{width:9px;height:9px;border-radius:3px;display:inline-block}.progress{height:9px;background:#edf1f6;border-radius:10px;overflow:hidden;margin:9px 0}.progress span{display:block;height:100%;border-radius:10px;background:var(--blue)}.insight{border-radius:12px;padding:13px 14px;background:#f1f6ff;border:1px solid #e2eaff;margin-top:10px;font-size:12px}.insight strong{display:block;margin-bottom:3px}.insight.warn{background:#fff8eb;border-color:#f8e7c6}.insight.goodbox{background:#effaf5;border-color:#d7f1e4}.table{width:100%;border-collapse:collapse;font-size:12px}.table th{text-align:left;color:var(--muted);font-weight:700;padding:10px 8px;border-bottom:1px solid var(--line)}.table td{padding:11px 8px;border-bottom:1px solid #f0f3f7}.pill{padding:4px 8px;border-radius:30px;font-size:10px;font-weight:800;background:#fff3df;color:#9b681b}.pill.paid{background:#e8f8ef;color:#16845b}.reminder-list{display:grid;gap:10px}.reminder{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px;border:1px solid var(--line);border-radius:11px}.reminder strong{font-size:12px;display:block}.reminder small{font-size:10px;color:var(--muted)}.flow{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.step{background:#f1f5ff;border:1px solid #dfe8ff;padding:10px 12px;border-radius:10px;font-size:11px;font-weight:700}.arrow{color:#9aa8bc}.guidelines{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.guideline{background:#fafcff;border:1px solid var(--line);border-radius:12px;padding:13px;font-size:12px}.guideline strong{display:block;margin-bottom:5px}.security{font-size:11px;color:var(--muted);line-height:1.6;margin-top:18px}.hidden{display:none!important}.section{margin-bottom:18px}.empty{color:var(--muted);font-size:12px;padding:15px 0}.footer{color:#93a0b2;text-align:center;font-size:10px;margin-top:28px}
+@media(max-width:1050px){.app{grid-template-columns:75px 1fr}.sidebar{padding:22px 10px}.brand{padding:0;justify-content:center}.brand-name,.nav-label,.nav button span,.side-note{display:none}.nav button{text-align:center;font-size:18px;padding:13px 5px}.kpis{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}
+@media(max-width:650px){.app{display:block}.sidebar{display:none}.main{padding:20px 14px}.topbar{align-items:flex-start}.topbar h1{font-size:22px}.profile .profile-text{display:none}.kpis{gap:9px}.card{padding:15px}.kpi-value{font-size:20px}.expense-grid{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.chart-wrap{height:auto;flex-direction:column}.guidelines{grid-template-columns:1fr}.month-tools{flex-wrap:wrap}.month-tools input{max-width:145px}}
+
+.auth{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#182b49,#2b4163 55%,#4776e6)}.auth-card{width:100%;max-width:420px;background:#fff;border-radius:20px;padding:30px;box-shadow:0 25px 60px rgba(0,0,0,.25)}.auth-card .brand{color:var(--navy);padding:0;margin-bottom:6px}.tabs{display:flex;background:#edf2ff;border-radius:11px;padding:4px;margin:16px 0}.tabs button{flex:1;padding:9px;border-radius:8px;background:transparent;color:#345fbe;font-weight:700}.tabs button.on{background:#fff;box-shadow:0 2px 8px rgba(31,52,83,.12)}.auth .field{margin-bottom:12px}.msg{font-size:12px;border-radius:9px;padding:9px 11px;margin-bottom:12px}.msg.err{background:#fff0f0;color:#bf414b}.msg.ok{background:#effaf5;color:#16845b}
+.topright{display:flex;align-items:center;gap:10px}.bell{position:relative;font-size:15px}.badge{background:var(--red);color:#fff;border-radius:20px;font-size:10px;padding:1px 7px;margin-left:6px;font-weight:800;font-style:normal;display:inline-block}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.chip{background:#edf2ff;color:#345fbe;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:700}.chip.on{background:var(--blue);color:#fff}
+.notice{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:11px}.notice strong{display:block;font-size:13px}.notice small{color:var(--muted);font-size:12px}.notice.bad{border-left-color:var(--red);background:#fff8f8}.notice.warn{border-left-color:var(--amber);background:#fffaf0}.notice.read{opacity:.55}
+.stats4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.table-wrap{overflow-x:auto}.reminder{flex-wrap:wrap}.bottomnav{display:none}
+@media(max-width:650px){.bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--navy);overflow-x:auto;z-index:20;padding:6px;gap:2px}.bottomnav button{flex:none;min-width:66px;background:transparent;color:#c5d0df;font-size:10px;padding:6px;display:flex;flex-direction:column;align-items:center;border-radius:8px}.bottomnav button.active{background:#2b4163;color:#fff}.main{padding-bottom:90px}.stats4{grid-template-columns:repeat(2,1fr)}.topbar{flex-wrap:wrap}.notice{flex-wrap:wrap}.auth-card{padding:22px}}
+.bar{height:8px;background:#edf1f6;border-radius:8px;overflow:hidden;min-width:90px}.bar i{display:block;height:100%}.bar .ok{background:#24a879}.bar .w{background:var(--amber)}.bar .o{background:var(--red)}
+.goal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}.goal-card{border:1px solid var(--line);border-radius:13px;padding:15px;background:#fbfdff}.goal-card h3{margin:0;font-size:15px}.goal-meta{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}.modal-backdrop{position:fixed;inset:0;background:rgba(13,25,45,.58);display:grid;place-items:center;padding:18px;z-index:1000}.modal-card{background:#fff;border-radius:18px;padding:23px;max-width:480px;width:100%;box-shadow:0 25px 70px rgba(0,0,0,.25);max-height:90vh;overflow:auto}.modal-card h2{margin:0 0 8px;font-size:20px}.modal-card p{font-size:13px;color:#53627a}.modal-card .actions{justify-content:flex-end}
+@media(max-width:650px){.goal-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="authView" class="auth hidden"><div class="auth-card">
+<div class="brand"><div class="brand-mark">F</div><span>FinWise</span></div>
+<p class="helper">Log in to open your personal monthly money planner.</p>
+<div class="tabs"><button type="button" id="tabLogin" class="on" onclick="authMode('login')">Log in</button><button type="button" id="tabSignup" onclick="authMode('signup')">Sign up</button></div>
+<div id="authMsg" class="msg hidden"></div>
+<form id="authForm" data-mode="login" onsubmit="submitAuth(event)" novalidate>
+<div class="field hidden" id="nameF"><label for="authName">Full name</label><input class="input" id="authName" autocomplete="name" placeholder="Your name"></div>
+<div class="field"><label for="authEmail">Email</label><input class="input" id="authEmail" type="email" autocomplete="username" placeholder="you@example.com"></div>
+<div class="field"><label for="authPass">Password</label><input class="input" id="authPass" type="password" autocomplete="current-password" placeholder="At least 6 characters"></div>
+<div class="field hidden" id="confF"><label for="authConf">Confirm password</label><input class="input" id="authConf" type="password" autocomplete="new-password"></div>
+<label class="helper" style="display:flex;gap:7px;align-items:center;margin:0 0 14px"><input type="checkbox" id="remember"> Keep me signed in on this device</label>
+<button class="btn primary" id="authBtn" style="width:100%;padding:12px">Log in</button></form>
+<div class="insight warn"><strong>Frontend demo only</strong>Accounts and data are stored in this browser's localStorage. Browser-based login is not suitable for storing real financial data securely. Do not enter real bank or card details.</div>
+</div></div>
+<div class="app hidden" id="appView">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark">F</div><span class="brand-name">FinWise</span></div>
+  <div class="nav-label">WORKSPACE</div>
+  <nav class="nav">
+    <button data-sec="dashboard" class="active" onclick="showSection('dashboard')">▦ <span>Dashboard</span></button>
+    <button data-sec="budget" onclick="showSection('budget')">＋ <span>Income & expenses</span></button>
+    <button data-sec="plans" onclick="showSection('plans')">🗂 <span>Monthly plans</span></button>
+    <button data-sec="transactions" onclick="showSection('transactions')">💸 <span>Transactions</span></button>
+    <button data-sec="compare" onclick="showSection('compare')">⚖ <span>Plan vs Actual</span></button>
+    <button data-sec="reminders" onclick="showSection('reminders')">◷ <span>Bill reminders</span></button>
+    <button data-sec="notifications" onclick="showSection('notifications')">🔔 <span>Notifications <i class="badge nb hidden">0</i></span></button>
+    <button data-sec="guidance" onclick="showSection('guidance')">✧ <span>Smart guidance</span></button>
+    <button data-sec="goals" onclick="showSection('goals')">🎯 <span>Savings goals</span></button>
+    <button data-sec="profile" onclick="showSection('profile')">◎ <span>My profile</span></button>
+    <button onclick="logout()">⎋ <span>Log out</span></button>
+  </nav>
+  <div class="side-note"><strong>Small steps. Strong future.</strong>Know where your money goes, plan for what matters, and build a safety net one month at a time.</div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div><div class="eyebrow">PERSONAL FINANCE • YOUR MONTHLY OVERVIEW</div><h1>Money, made clearer.</h1></div>
+  <div class="topright"><button class="btn secondary bell" onclick="showSection('notifications')" title="Notifications">🔔<i class="badge nb hidden">0</i></button><div class="profile"><div class="avatar" id="avatar">U</div><div class="profile-text"><strong id="profileName">Your profile</strong><small>Personal workspace</small></div></div><button class="btn danger" onclick="logout()">Log out</button></div>
+</header>
+<div class="month-tools section">
+  <div class="field"><label for="month">Choose month</label><input class="input" type="month" id="month"></div>
+  <button class="btn secondary" onclick="loadMonth()">Load month</button>
+  <button class="btn secondary" onclick="copyPrev()">Copy last month's plan</button>
+  <button class="btn primary" onclick="saveData()">Save my plan</button>
+  <button class="btn secondary" onclick="showSection('plans')">View saved plans</button>
+</div>
+
+<section id="dashboard" class="page-section">
+  <div class="grid kpis">
+    <div class="card"><div class="kpi-top">Monthly income <span class="kpi-icon">↗</span></div><div class="kpi-value" id="kIncome">₹0</div><div class="kpi-sub">Your take-home income</div></div>
+    <div class="card"><div class="kpi-top">Total expenditure <span class="kpi-icon">↘</span></div><div class="kpi-value" id="kExpense">₹0</div><div class="kpi-sub" id="expenseSub">Across all categories</div></div>
+    <div class="card"><div class="kpi-top">Money remaining <span class="kpi-icon">◈</span></div><div class="kpi-value" id="kBalance">₹0</div><div class="kpi-sub">Income minus expenses</div></div>
+    <div class="card"><div class="kpi-top">Savings rate <span class="kpi-icon">⌁</span></div><div class="kpi-value" id="kSavings">0%</div><div class="kpi-sub" id="savingsSub">Of your monthly income</div></div>
+  </div>
+
+  <div class="grid two-col">
+    <div class="card">
+      <div class="section-head"><div><h2>Where your money goes</h2><p>Expense split by category</p></div><span class="eyebrow" id="chartMonth"></span></div>
+      <div class="chart-wrap"><div class="donut" id="donut"><div class="donut-center"><strong id="donutTotal">₹0</strong><span>TOTAL SPENT</span></div></div><div class="legend" id="legend"><div class="empty">Add expenses to see your breakdown.</div></div></div>
+    </div>
+    <div class="card">
+      <div class="section-head"><div><h2>Your financial health</h2><p>A quick check of this month's plan</p></div></div>
+      <div class="kpi-top"><span>Expense-to-income ratio</span><strong id="ratio">0%</strong></div><div class="progress"><span id="ratioBar" style="width:0%"></span></div>
+      <div class="kpi-top"><span>Emergency fund target</span><strong id="emergencyProgress">0%</strong></div><div class="progress"><span id="emergencyBar" style="width:0%;background:#24a879"></span></div>
+      <div id="healthInsight" class="insight">Enter your income and expenses to receive a financial health check.</div>
+      <div id="emergencyInsight" class="insight goodbox">Aim to gradually build an emergency fund for 3–6 months of essential expenses.</div>
+    </div>
+  </div>
+  <div class="grid two-col">
+    <div class="card">
+      <div class="section-head"><div><h2>Monthly budget snapshot</h2><p>Planned vs actual spending</p></div></div>
+      <div id="budgetSnapshot" class="empty">Enter your monthly plan to view your snapshot.</div>
+    </div>
+    <div class="card">
+      <div class="section-head"><div><h2>Upcoming payments</h2><p>Keep important due dates in sight</p></div><button class="btn secondary" onclick="showSection('reminders')">View all</button></div>
+      <div id="upcomingMini" class="reminder-list"><div class="empty">No reminders added yet.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="budget" class="page-section hidden">
+  <div class="card section">
+    <div class="section-head"><div><h2>1. Tell us about your income</h2><p>Use your monthly take-home amount after deductions.</p></div></div>
+    <div class="form-grid">
+      <div class="field"><label>Monthly salary / take-home income (₹)</label><input class="input" id="income" type="number" min="0" placeholder="e.g. 45000"></div>
+      <div class="field"><label>Other monthly income (₹)</label><input class="input" id="otherIncome" type="number" min="0" placeholder="Freelance, rent, etc."></div>
+      <div class="field"><label>Existing savings (₹)</label><input class="input" id="existingSavings" type="number" min="0" placeholder="Current savings balance"></div>
+      <div class="field"><label>Emergency fund target (₹)</label><input class="input" id="emergencyTarget" type="number" min="0" placeholder="Suggested: 3–6 months of essentials"></div>
+    </div>
+  </div>
+  <div class="card section">
+    <div class="section-head"><div><h2>2. Where do you spend your money?</h2><p>Enter the amount you expect to spend this month. Enter 0 if not applicable.</p></div></div>
+    <div class="expense-grid" id="expenseFields"></div>
+    <div class="actions"><button class="btn primary" onclick="calculate();$('planResult').scrollIntoView({behavior:'smooth',block:'center'})">Calculate my monthly plan</button><button class="btn secondary" onclick="saveData()">Save entries</button><button class="btn danger" onclick="clearExpenses()">Clear expenses</button></div>
+    <p class="helper">Credit card bill: enter the amount you will pay this month. Avoid counting the same purchase twice (once as a purchase category and again as a card bill).</p>
+  </div>
+  <div class="card section"><div class="section-head"><div><h2>Your plan result</h2><p>Updates live as you type. Press Calculate to jump here.</p></div><div class="actions" style="margin:0"><button class="btn secondary" onclick="showSection('dashboard')">View full dashboard</button><button class="btn primary" onclick="saveData()">Save my plan</button></div></div><div id="planResult"></div></div>
+  <div class="card section">
+    <div class="section-head"><div><h2>3. Your monthly money flow</h2><p>Follow the flow from income to financial safety.</p></div></div>
+    <div class="flow"><div class="step">Monthly income</div><span class="arrow">→</span><div class="step">Essential bills</div><span class="arrow">→</span><div class="step">Lifestyle spending</div><span class="arrow">→</span><div class="step">Savings & emergency fund</div><span class="arrow">→</span><div class="step">Review & improve</div></div>
+  </div>
+</section>
+
+<section id="reminders" class="page-section hidden">
+  <div class="card section">
+    <div class="section-head"><div><h2>Bill & payment reminders</h2><p>Add rent, credit card, school/college fees, insurance, EMI and medical payment due dates.</p></div></div>
+    <div class="form-grid">
+      <div class="field"><label>Bill / payment name</label><input class="input" id="billName" placeholder="e.g. Credit card payment"></div>
+      <div class="field"><label>Amount (₹)</label><input class="input" id="billAmount" type="number" min="0" placeholder="e.g. 3500"></div>
+      <div class="field"><label>Due date</label><input class="input" id="billDate" type="date"></div>
+      <div class="field"><label>Payment type</label><select id="billType"><option>Credit card</option><option>Rent</option><option>School / college fees</option><option>Medical</option><option>Insurance premium</option><option>EMI / loan</option><option>Utilities</option><option>Other</option></select></div>
+    </div>
+    <div class="actions"><button class="btn primary" onclick="addReminder()">Add reminder</button><button class="btn secondary" onclick="enableNotifications()">Enable browser notifications</button></div>
+    <p class="helper">Browser notifications require your permission. Reminders in this demo are checked when this page is open; they are not guaranteed if the browser is closed.</p>
+  </div>
+  <div class="card"><div class="section-head"><div><h2>Your reminders</h2><p>Mark a bill as paid once completed.</p></div></div><div id="reminderList" class="reminder-list"><div class="empty">No reminders yet. Add your first payment above.</div></div></div>
+</section>
+
+<section id="transactions" class="page-section hidden">
+<div class="card section"><div class="section-head"><div><h2 id="txTitle">Add a transaction</h2><p>Record what you actually spend or receive. It counts as Actual in Plan vs Actual.</p></div></div>
+<div class="form-grid">
+<div class="field"><label>Date</label><input class="input" id="txDate" type="date"></div>
+<div class="field"><label>Type</label><select id="txType" onchange="txTypeChange()"><option value="expense">Expense</option><option value="income">Income</option></select></div>
+<div class="field"><label>Category</label><select id="txCat"></select></div>
+<div class="field"><label>Amount (₹)</label><input class="input" id="txAmt" type="number" min="0" placeholder="e.g. 450"></div>
+<div class="field"><label>Paid via</label><select id="txMode"><option>UPI</option><option>Cash</option><option>Card</option><option>Bank transfer</option><option>Other</option></select></div>
+<div class="field"><label>Note</label><input class="input" id="txNote" placeholder="e.g. Vegetables"></div></div>
+<div class="actions"><button class="btn primary" id="txBtn" onclick="saveTx()">Add transaction</button><button class="btn secondary hidden" id="txCancel" onclick="resetTx()">Cancel edit</button></div></div>
+<div class="card"><div class="section-head"><div><h2>Transactions</h2><p id="txSub"></p></div><select id="txFilter" onchange="renderTx()" style="width:auto"></select></div><div class="stats4" id="txStats"></div><div class="table-wrap" id="txList"></div></div>
+</section>
+<section id="compare" class="page-section hidden">
+<div class="card section"><div class="section-head"><div><h2>Plan vs Actual</h2><p id="cmpSub"></p></div></div><div class="stats4" id="cmpStats"></div><div id="cmpInsights"></div></div>
+<div class="card"><div class="table-wrap" id="cmpTable"></div></div>
+</section>
+<section id="plans" class="page-section hidden">
+  <div class="card section"><div class="section-head"><div><h2>Saved monthly plan</h2><p id="planSub"></p></div><button class="btn secondary" onclick="showSection('budget')">Edit entries</button></div><div id="planDetail"></div></div>
+  <div class="card"><div class="section-head"><div><h2>Month-wise history</h2><p>Every month you have saved. Open a month to view or edit it.</p></div></div><div id="planHistory" class="reminder-list"></div></div>
+</section>
+
+<section id="notifications" class="page-section hidden">
+  <div class="card"><div class="section-head"><div><h2>Notifications</h2><p>Bill reminders, due dates, budget limit warnings and other alerts.</p></div><div class="actions" style="margin:0"><button class="btn secondary" onclick="markAllRead()">Mark all as read</button><button class="btn secondary" onclick="enableNotifications()">Browser alerts</button></div></div><div class="chips" id="notifChips"></div><div id="notifList" class="reminder-list"></div></div>
+</section>
+
+<section id="guidance" class="page-section hidden">
+  <div class="card section"><div class="section-head"><div><h2>Smart spending guidance</h2><p>Simple suggestions based on the numbers you enter.</p></div></div><div id="guidanceList" class="guidelines"><div class="empty">Calculate your plan to receive suggestions.</div></div></div>
+  <div class="card section"><div class="section-head"><div><h2>Build your financial safety net</h2><p>Insurance is protection against large unexpected costs, not an investment recommendation.</p></div></div>
+    <div class="guidelines">
+      <div class="guideline"><strong>🏥 Health insurance</strong>Consider adequate health cover for yourself and dependants. Check waiting periods, exclusions, co-payments, room limits and hospital network.</div>
+      <div class="guideline"><strong>🛡️ Term life insurance</strong>If someone depends on your income, consider pure term cover sized around their needs, liabilities and future goals. Review policy exclusions and claim conditions.</div>
+      <div class="guideline"><strong>🚗 Asset protection</strong>Keep legally required motor insurance active if you own a vehicle. Consider home/contents cover where it makes sense for your situation.</div>
+    </div>
+    <div class="insight warn"><strong>Before buying any policy</strong>Compare the policy wording, premium affordability, coverage, exclusions, claim process and insurer service. Avoid buying solely because of a tax benefit. These are general educational pointers, not personalised financial advice.</div>
+  </div>
+  <div class="card"><div class="section-head"><div><h2>Helpful money guidelines</h2></div></div><div class="guidelines">
+    <div class="guideline"><strong>50 / 30 / 20 is a starting point</strong>Try to plan roughly 50% for needs, 30% for wants and 20% for savings/debt goals. Adjust it to your income and responsibilities.</div>
+    <div class="guideline"><strong>Plan before spending</strong>Set aside money for rent, fees, EMIs and premiums first. Pay at least the full credit-card statement balance by its due date whenever possible.</div>
+    <div class="guideline"><strong>Prepare for emergencies</strong>Build a separate, accessible reserve over time. A common goal is 3–6 months of essential expenses; more may be appropriate for variable income.</div>
+  </div></div>
+</section>
+
+<section id="goals" class="page-section hidden">
+  <div class="card section">
+    <div class="section-head"><div><h2>My savings goals</h2><p>Create any goal you want, choose a target amount and set a deadline.</p></div></div>
+    <form id="goalForm" onsubmit="saveGoal(event)" novalidate>
+      <input type="hidden" id="goalId">
+      <div class="form-grid">
+        <div class="field"><label for="goalName">Goal name</label><input class="input" id="goalName" maxlength="60" placeholder="e.g. Buy a laptop, trip, course fees" required></div>
+        <div class="field"><label for="goalTarget">Target amount (₹)</label><input class="input" id="goalTarget" type="number" min="1" placeholder="e.g. 60000" required></div>
+        <div class="field"><label for="goalSaved">Already saved (₹)</label><input class="input" id="goalSaved" type="number" min="0" placeholder="e.g. 5000" value="0"></div>
+        <div class="field"><label for="goalDeadline">Deadline</label><input class="input" id="goalDeadline" type="date" required></div>
+      </div>
+      <div class="actions"><button class="btn primary" id="goalSubmit">Add savings goal</button><button class="btn secondary" type="button" onclick="resetGoalForm()">Clear</button></div>
+    </form>
+  </div>
+  <div class="card"><div class="section-head"><div><h2>Your goals & progress</h2><p>Update the saved amount as you put money aside.</p></div></div><div id="goalList" class="goal-grid"><div class="empty">No goals yet. Create your first savings goal.</div></div></div>
+</section>
+
+<section id="profile" class="page-section hidden">
+  <div class="card section"><div class="section-head"><div><h2>Your personal profile</h2><p>These details personalise the dashboard on this device.</p></div></div>
+    <div class="form-grid">
+      <div class="field"><label>Full name</label><input class="input" id="userName" placeholder="Enter your name"></div>
+      <div class="field"><label>Email (optional)</label><input class="input" id="userEmail" type="email" placeholder="you@example.com"></div>
+      <div class="field"><label>Currency</label><select id="currency"><option value="INR">Indian Rupee (₹)</option><option value="USD">US Dollar ($)</option><option value="EUR">Euro (€)</option></select></div>
+      <div class="field"><label>Monthly essential expenses target (₹)</label><input class="input" id="essentialTarget" type="number" min="0" placeholder="Optional"></div>
+    </div>
+    <div class="actions"><button class="btn primary" onclick="saveProfile()">Save profile</button><button class="btn danger" onclick="deleteAllData()">Delete all saved data</button></div>
+    <div class="security"><strong>Privacy & security:</strong> <b>Frontend demo only: browser-based login is not suitable for storing real financial data securely.</b> Each account's data is kept separately in this browser. This standalone demo stores the information you enter in your browser's local storage on this device. It does not send data to a server, but local storage is not encrypted and is not suitable for highly sensitive information. Do not enter bank passwords, card numbers, CVV, PINs or account credentials. For a real public finance product, add secure server-side authentication, HTTPS, encryption at rest, access controls, backups and a privacy policy.</div>
+  </div>
+</section>
+<div id="smartAlert" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="smartAlertTitle">
+  <div class="modal-card"><div class="eyebrow" id="smartAlertLevel">FINWISE SMART ALERT</div><h2 id="smartAlertTitle">Review your spending</h2><div id="smartAlertBody"></div><div class="actions"><button class="btn secondary" onclick="closeSmartAlert()">Review later</button><button class="btn primary" onclick="closeSmartAlert();showSection('guidance')">View saving suggestions</button></div></div>
+</div>
+<div class="footer">FINWISE • A personal budgeting demo • Your money decisions, made clearer</div>
+</main>
+<nav class="bottomnav">
+  <button data-sec="dashboard" class="active" onclick="showSection('dashboard')">▦<span>Home</span></button>
+  <button data-sec="budget" onclick="showSection('budget')">＋<span>Entries</span></button>
+  <button data-sec="plans" onclick="showSection('plans')">🗂<span>Plans</span></button>
+  <button data-sec="transactions" onclick="showSection('transactions')">💸<span>Spends</span></button>
+  <button data-sec="compare" onclick="showSection('compare')">⚖<span>Vs Actual</span></button>
+  <button data-sec="reminders" onclick="showSection('reminders')">◷<span>Bills</span></button>
+  <button data-sec="notifications" onclick="showSection('notifications')">🔔<span>Alerts <i class="badge nb hidden">0</i></span></button>
+  <button data-sec="guidance" onclick="showSection('guidance')">✧<span>Guide</span></button>
+  <button data-sec="goals" onclick="showSection('goals')">🎯<span>Goals</span></button>
+  <button data-sec="profile" onclick="showSection('profile')">◎<span>Profile</span></button>
+  <button onclick="logout()">⎋<span>Log out</span></button>
+</nav>
+</div>
+<script>
+const categories=[
+["Rent / housing","rent"],["Groceries & food","food"],["Electricity, water & gas","utilities"],["Mobile & internet","internet"],["Transport / fuel","transport"],["School / college fees","fees"],["Medical & medicines","medical"],["Credit card bill","credit"],["EMI / loan payments","emi"],["Insurance premiums","insurance"],["Shopping & personal care","shopping"],["Entertainment & eating out","fun"],["Family support","family"],["Other expenses","other"]
+];
+const colors=["#4776e6","#2bb98a","#f2b84b","#8a72d6","#e87979","#47a7b8","#d18a55","#7186a9","#bc78a9","#8fa84e","#d4a6b4","#7197c5","#aa9b75","#8d9aa9"];
+let reminders=[];
+let editingGoal=null;
+const $=id=>document.getElementById(id);
+const fmt=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:$("currency")?.value||"INR",maximumFractionDigits:0}).format(Number(n)||0);
+function buildExpenseFields(){ $("expenseFields").innerHTML=categories.map(([name,key])=>`<div class="field"><label>${name} (₹)</label><input class="input expense" id="${key}" type="number" min="0" placeholder="0" value="0"></div>`).join("");}
+function showSection(id){document.querySelectorAll('.page-section').forEach(x=>x.classList.add('hidden'));$(id).classList.remove('hidden');document.querySelectorAll('[data-sec]').forEach(b=>b.classList.toggle('active',b.dataset.sec===id));if(id==='reminders')renderReminders();if(id==='guidance')renderGuidance();if(id==='plans')renderPlans();if(id==='transactions')renderTx();if(id==='compare')renderCompare();if(id==='notifications')renderNotifs();if(id==='goals')renderGoals();window.scrollTo(0,0);}
+function values(){let obj={};categories.forEach(([n,k])=>obj[k]=Math.max(0,Number($(k).value)||0));return obj;}
+function calculate(){
+ let income=Math.max(0,Number($("income").value)||0)+Math.max(0,Number($("otherIncome").value)||0), exp=values(), total=Object.values(exp).reduce((a,b)=>a+b,0), balance=income-total, rate=income?Math.max(0,balance)/income*100:0;
+ $("kIncome").textContent=fmt(income);$("kExpense").textContent=fmt(total);$("kBalance").textContent=fmt(balance);$("kBalance").className="kpi-value "+(balance>=0?"good":"bad");$("kSavings").textContent=rate.toFixed(1)+"%";$("savingsSub").textContent=balance<0?"You are spending more than your income":"Of your income left after expenses";$("expenseSub").textContent=income?((total/income)*100).toFixed(1)+"% of total income":"Across all categories";
+ $("ratio").textContent=income?(total/income*100).toFixed(1)+"%":"0%";$("ratioBar").style.width=Math.min(100,income?total/income*100:0)+"%";
+ let essentials=exp.rent+exp.food+exp.utilities+exp.internet+exp.transport+exp.fees+exp.medical+exp.emi, target=Number($("emergencyTarget").value)||essentials*3, saved=Number($("existingSavings").value)||0, pct=target?Math.min(100,saved/target*100):0;
+ $("emergencyProgress").textContent=pct.toFixed(0)+"%";$("emergencyBar").style.width=pct+"%";
+ $("healthInsight").className="insight "+(balance<0?"warn":rate<10?"warn":"goodbox");
+ $("healthInsight").innerHTML=balance<0?"<strong>Overspending alert</strong>Your expenses are higher than your income. Review flexible categories and avoid adding new debt.":rate<10?"<strong>Build more breathing room</strong>Your remaining amount is under 10% of income. Try setting a small automatic savings target.":"<strong>Good monthly breathing room</strong>You have money left after expenses. Assign some of it to savings and future goals.";
+ $("emergencyInsight").innerHTML=`<strong>Emergency fund</strong>${fmt(saved)} saved against a target of ${fmt(target)}. ${pct>=100?"Your entered target is reached. Review it as your expenses change.":"Keep building this reserve gradually; aim for 3–6 months of essential expenses."}`;
+ $("donutTotal").textContent=fmt(total);$("chartMonth").textContent=$("month").value||"THIS MONTH";
+ let nonzero=categories.map(([n,k],i)=>({name:n,key:k,value:exp[k],color:colors[i]})).filter(x=>x.value>0).sort((a,b)=>b.value-a.value);
+ let cumulative=0,stops=nonzero.map(x=>{let start=cumulative/Math.max(total,1)*100;cumulative+=x.value;return `${x.color} ${start}% ${cumulative/Math.max(total,1)*100}%`;});
+ $("donut").style.background=total?`conic-gradient(${stops.join(",")})`:"conic-gradient(#e8edf4 0 100%)";
+ $("legend").innerHTML=nonzero.length?nonzero.slice(0,7).map(x=>`<div class="legend-row"><span class="legend-name"><i class="dot" style="background:${x.color}"></i>${x.name}</span><strong>${fmt(x.value)}</strong></div>`).join(""):"<div class='empty'>Add expenses to see your breakdown.</div>";
+ $("budgetSnapshot").innerHTML=`<div class="kpi-top"><span>Income</span><strong>${fmt(income)}</strong></div><div class="kpi-top"><span>Expenses</span><strong>${fmt(total)}</strong></div><div class="progress"><span style="width:${Math.min(100,income?total/income*100:0)}%"></span></div><div class="kpi-top"><span>Actual spent so far</span><strong>${fmt(actuals($("month").value).tot)}</strong></div><div class="progress"><span style="width:${Math.min(100,total?actuals($("month").value).tot/total*100:0)}%;background:#24a879"></span></div><div class="kpi-top"><span>Available after expenses</span><strong class="${balance>=0?'good':'bad'}">${fmt(balance)}</strong></div><p class="helper">${balance>=0?"Consider assigning part of the remaining balance to savings before discretionary spending.":"You have a shortfall. Prioritise essentials and contact lenders early if a payment may be missed."}</p>`;
+ renderGuidance();renderMiniReminders();planResult(income,total,balance,rate,nonzero);if(!$("compare").classList.contains("hidden"))renderCompare();return {income,total,balance,rate,exp};
+}
+function renderGuidance(){
+ if(!$("guidanceList"))return;let d=calculateDataOnly(),arr=[];
+ if(!d.income){$("guidanceList").innerHTML="<div class='empty'>Add income and expenses to get useful suggestions.</div>";return;}
+ if(d.balance<0)arr.push(["⚠️ Spending is above income",`You are short by ${fmt(-d.balance)}. Start by reviewing shopping, eating out and other flexible costs.`]);
+ if(d.exp.credit>0)arr.push(["💳 Credit card check","Try to pay the full statement balance by the due date. If you cannot, pause new card spending and make a repayment plan; minimum payment alone can leave costly interest." ]);
+ if(d.exp.fees>0)arr.push(["🎓 Plan education fees","Set aside a fixed amount each month before the fee deadline, and add a reminder for the payment date."]);
+ if(d.exp.medical>0)arr.push(["🩺 Medical buffer","Keep a separate medical buffer and review whether your health insurance coverage suits your family and budget."]);
+ if(d.rate<20)arr.push(["🌱 Grow savings gradually","Try a realistic savings amount first, then increase it when you review the next month's spending."]);
+ if(d.exp.fun+d.exp.shopping>d.income*.2)arr.push(["🛍️ Review lifestyle spending","Shopping and entertainment are above 20% of income. Set a weekly cap and track purchases before checkout."]);
+ arr.push(["🧯 Emergency fund","Work toward 3–6 months of essential expenses in a separate, accessible account."]);
+ $("guidanceList").innerHTML=arr.map(([a,b])=>`<div class="guideline"><strong>${a}</strong>${b}</div>`).join("");
+}
+function calculateDataOnly(){let income=(Number($("income").value)||0)+(Number($("otherIncome").value)||0),exp=values(),total=Object.values(exp).reduce((a,b)=>a+b,0);return {income,exp,total,balance:income-total,rate:income?Math.max(0,(income-total)/income*100):0};}
+const US="finwise_users",SS="finwise_session",LS=localStorage;
+let user=null,store=null,active=null,notifFilter="all";
+const todayStr=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const monthName=m=>{let[y,mo]=m.split("-");return new Date(y,mo-1,1).toLocaleDateString("en-IN",{month:"long",year:"numeric"});};
+const getUsers=()=>{try{return JSON.parse(LS.getItem(US))||{};}catch(e){return{};}};
+async function hashPw(pw,salt){try{let b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(salt+pw));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");}catch(e){let h=5381;for(const c of salt+pw)h=((h*33)^c.charCodeAt(0))>>>0;return"f"+h;}}
+/* ---------- Auth (demo only) ---------- */
+function authMode(m){$("authForm").dataset.mode=m;["nameF","confF"].forEach(i=>$(i).classList.toggle("hidden",m==="login"));$("tabLogin").classList.toggle("on",m==="login");$("tabSignup").classList.toggle("on",m!=="login");$("authBtn").textContent=m==="login"?"Log in":"Create account";$("authPass").autocomplete=m==="login"?"current-password":"new-password";authMsg("");}
+function authMsg(t){let e=$("authMsg");e.textContent=t;e.className="msg err"+(t?"":" hidden");}
+async function submitAuth(ev){ev.preventDefault();let mode=$("authForm").dataset.mode,email=$("authEmail").value.trim().toLowerCase(),pw=$("authPass").value,users=getUsers();
+ if(!/^\S+@\S+\.\S+$/.test(email))return authMsg("Please enter a valid email address.");
+ if(pw.length<6)return authMsg("Password must be at least 6 characters.");
+ if(mode==="signup"){let name=$("authName").value.trim();if(!name)return authMsg("Please enter your name.");if(pw!==$("authConf").value)return authMsg("Passwords do not match.");if(users[email])return authMsg("An account with this email already exists. Please log in.");
+  let salt=Math.random().toString(36).slice(2)+Date.now().toString(36),first=!Object.keys(users).length;users[email]={name,email,salt,hash:await hashPw(pw,salt)};
+  try{LS.setItem(US,JSON.stringify(users));}catch(e){return authMsg("Could not create account. Check your browser storage settings.");}
+  user=users[email];loadStore();store.profile={name,email,currency:"INR",essential:""};if(first)migrateLegacy();persist();active=null;user=null;}
+ else{let u=users[email];if(!u||u.hash!==await hashPw(pw,u.salt))return authMsg("Incorrect email or password.");}
+ (($("remember").checked)?LS:sessionStorage).setItem(SS,email);$("authForm").reset();route();}
+function migrateLegacy(){Object.keys(LS).filter(k=>/^finwise_\d{4}-\d{2}$/.test(k)).forEach(k=>{try{let d=JSON.parse(LS.getItem(k));store.plans[k.slice(8)]=d;(d.reminders||[]).forEach(r=>{if(!store.reminders.some(x=>x.id===r.id))store.reminders.push(r);});}catch(e){}});try{let p=JSON.parse(LS.getItem("finwise_profile"));if(p){store.profile=Object.assign({},p,{name:p.name||user.name,email:p.email||user.email});}}catch(e){}}
+function route(){let email=sessionStorage.getItem(SS)||LS.getItem(SS),u=email&&getUsers()[email];
+ if(u){if(active!==u.email){active=u.email;user=u;enterApp();}$("authView").classList.add("hidden");$("appView").classList.remove("hidden");if(location.hash!=="#app")location.hash="app";}
+ else{active=null;user=null;store=null;reminders=[];$("appView").classList.add("hidden");$("authView").classList.remove("hidden");authMode("login");if(location.hash!=="#login")location.hash="login";}}
+function enterApp(){loadStore();reminders=store.reminders;$("month").value=todayStr().slice(0,7);loadProfile();loadMonth();renderReminders();renderGoals();showSection("dashboard");evaluateSmartAlert(false);}
+function logout(){if(store)persist();sessionStorage.removeItem(SS);LS.removeItem(SS);route();}
+/* ---------- Per-user storage ---------- */
+const uKey=()=>"finwise_data_"+encodeURIComponent(user.email);
+function loadStore(){try{store=JSON.parse(LS.getItem(uKey()))||{};}catch(e){store={};}store.plans=store.plans||{};store.reminders=store.reminders||[];store.read=store.read||{};store.tx=store.tx||[];store.goals=store.goals||[];store.profile=store.profile||{};}
+function persist(){if(!store)return false;store.reminders=reminders;try{LS.setItem(uKey(),JSON.stringify(store));return true;}catch(e){alert("Could not save data. Check your browser storage settings.");return false;}}
+/* ---------- Monthly plans ---------- */
+function saveData(){let m=$("month").value;if(!m){alert("Please choose a month first.");return;}
+ store.plans[m]={month:m,income:$("income").value,otherIncome:$("otherIncome").value,existingSavings:$("existingSavings").value,emergencyTarget:$("emergencyTarget").value,expenses:values(),savedAt:new Date().toISOString()};
+ store.profile={name:$("userName").value,email:$("userEmail").value,currency:$("currency").value,essential:$("essentialTarget").value};
+ if(persist()){calculate();renderPlans();evaluateSmartAlert(true);alert("Your plan for "+monthName(m)+" has been saved. You can view it under Monthly plans.");}}
+function loadMonth(){let d=store.plans[$("month").value];["income","otherIncome","existingSavings","emergencyTarget"].forEach(k=>$(k).value=d?d[k]||"":"");categories.forEach(([n,k])=>$(k).value=d?.expenses?.[k]||0);calculate();renderReminders();renderPlans();defTxDate();renderTx();renderGoals();}
+function planStats(p){let inc=(+p.income||0)+(+p.otherIncome||0),tot=Object.values(p.expenses||{}).reduce((a,b)=>a+(+b||0),0),bal=inc-tot;return{inc,tot,bal,rate:inc?Math.max(0,bal)/inc*100:0};}
+function renderPlans(){if(!store)return;let m=$("month").value,p=store.plans[m],keys=Object.keys(store.plans).sort().reverse();
+ $("planSub").textContent=m?monthName(m)+(p?" • saved "+new Date(p.savedAt||Date.now()).toLocaleDateString("en-IN"):" • not saved yet"):"Choose a month";
+ if(!p){$("planDetail").innerHTML=`<div class="empty">No plan saved for ${m?monthName(m):"this month"} yet. Add your income and expenses, then press <strong>Save my plan</strong>.</div>`;}
+ else{let s=planStats(p),rows=categories.map(([n,k])=>[n,+p.expenses?.[k]||0]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
+  $("planDetail").innerHTML=`<div class="stats4">${[["Income",fmt(s.inc),""],["Expenses",fmt(s.tot),""],["Remaining",fmt(s.bal),s.bal>=0?"good":"bad"],["Savings rate",s.rate.toFixed(1)+"%",""]].map(([a,b,c])=>`<div class="guideline"><span class="helper">${a}</span><strong class="${c}" style="font-size:18px;margin:2px 0 0">${b}</strong></div>`).join("")}</div><div class="table-wrap"><table class="table"><tr><th>Category</th><th>Amount</th><th>Share</th></tr>${rows.map(([n,v])=>`<tr><td>${n}</td><td>${fmt(v)}</td><td>${s.tot?(v/s.tot*100).toFixed(0):0}%</td></tr>`).join("")||"<tr><td colspan='3' class='empty'>No expenses entered.</td></tr>"}</table></div>`;}
+ $("planHistory").innerHTML=keys.length?keys.map(k=>{let s=planStats(store.plans[k]);return `<div class="reminder"><div><strong>${monthName(k)}${k===m?' <span class="pill paid">VIEWING</span>':""}</strong><small>Income ${fmt(s.inc)} • Spent ${fmt(s.tot)} • <span class="${s.bal>=0?"good":"bad"}">${s.bal>=0?"Left":"Short"} ${fmt(Math.abs(s.bal))}</span> • Savings ${s.rate.toFixed(0)}%</small></div><div class="actions" style="margin:0"><button class="btn primary" onclick="openPlan('${k}')">Open</button><button class="btn danger" onclick="deletePlan('${k}')">Delete</button></div></div>`;}).join(""):"<div class='empty'>No saved plans yet. Save your first monthly plan and it will appear here.</div>";}
+function openPlan(m){$("month").value=m;loadMonth();showSection("plans");}
+function deletePlan(m){if(confirm("Delete the saved plan for "+monthName(m)+"?")){delete store.plans[m];persist();if($("month").value===m)loadMonth();renderPlans();updateNotifs();}}
+/* ---------- Profile ---------- */
+function setProfileUI(){let n=store.profile.name||user.name||"";$("profileName").textContent=n||"Your profile";$("avatar").textContent=(n||"U").trim().charAt(0).toUpperCase();}
+function saveProfile(){store.profile={name:$("userName").value,email:$("userEmail").value,currency:$("currency").value,essential:$("essentialTarget").value};if(!persist())return;setProfileUI();calculate();alert("Profile saved.");}
+function loadProfile(){let p=store.profile||{};$("userName").value=p.name||user.name||"";$("userEmail").value=p.email||user.email||"";$("currency").value=p.currency||"INR";$("essentialTarget").value=p.essential||"";setProfileUI();}
+/* ---------- Notifications ---------- */
+function buildNotifs(){let n=[],m=$("month").value,d=calculateDataOnly(),p=store.profile||{},t0=new Date(todayStr()+"T00:00:00");
+ reminders.filter(r=>!r.paid).forEach(r=>{let days=Math.round((new Date(r.date+"T00:00:00")-t0)/864e5),t=`${r.name} • ${fmt(r.amount)} • ${r.type}`;
+  if(days<0)n.push({id:"bill-"+r.id+"-over",cat:"bill",lvl:"bad",title:"Overdue: "+r.name,text:`${t} was due on ${r.date} (${-days} day${days==-1?"":"s"} ago).`});
+  else if(days===0)n.push({id:"bill-"+r.id+"-today",cat:"bill",lvl:"bad",title:"Due today: "+r.name,text:`${t} is due today.`});
+  else if(days<=7)n.push({id:"bill-"+r.id+"-soon",cat:"bill",lvl:"warn",title:"Due soon: "+r.name,text:`${t} is due in ${days} day${days==1?"":"s"} (${r.date}).`});});
+ if(d.income){let ratio=d.total/d.income*100,ess=d.exp.rent+d.exp.food+d.exp.utilities+d.exp.internet+d.exp.transport+d.exp.fees+d.exp.medical+d.exp.emi;
+  if(d.balance<0)n.push({id:"over-"+m,cat:"budget",lvl:"bad",title:"Budget limit exceeded",text:`Expenses are ${fmt(-d.balance)} above income for ${monthName(m)}.`});
+  else if(ratio>=80)n.push({id:"high-"+m,cat:"budget",lvl:"warn",title:"Approaching your budget limit",text:`You have planned ${ratio.toFixed(0)}% of your income for expenses in ${monthName(m)}.`});
+  if(d.balance>=0&&d.rate<10)n.push({id:"lowsave-"+m,cat:"budget",lvl:"warn",title:"Low savings rate",text:`Only ${d.rate.toFixed(1)}% of income is left after expenses. Try to build more breathing room.`});
+  if(+p.essential&&ess>+p.essential)n.push({id:"ess-"+m,cat:"budget",lvl:"warn",title:"Essential expenses above your target",text:`Essentials are ${fmt(ess)} against your target of ${fmt(p.essential)}.`});
+  let target=+$("emergencyTarget").value||ess*3,saved=+$("existingSavings").value||0;if(target&&saved/target<.5)n.push({id:"emg-"+m,cat:"budget",lvl:"info",title:"Emergency fund below 50%",text:`${fmt(saved)} saved against a target of ${fmt(target)}.`});
+  if(d.exp.credit>0)n.push({id:"cc-"+m,cat:"info",lvl:"info",title:"Credit card payment planned",text:`${fmt(d.exp.credit)} is planned for your credit card. Pay the full statement by the due date to avoid interest.`});}
+ {let pv=values(),ac=actuals(m).by;categories.forEach(([nm,k])=>{if(pv[k]>0&&ac[k]>0){let r=ac[k]/pv[k]*100;if(r>=100)n.push({id:"cover-"+m+k,cat:"budget",lvl:"bad",title:"Over budget: "+nm,text:`Spent ${fmt(ac[k])} against a plan of ${fmt(pv[k])}.`});else if(r>=80)n.push({id:"c80-"+m+k,cat:"budget",lvl:"warn",title:"Nearly at limit: "+nm,text:`${r.toFixed(0)}% of your ${fmt(pv[k])} plan is used.`});}});}
+ if(!store.plans[m])n.push({id:"unsaved-"+m,cat:"info",lvl:"info",title:"Plan not saved",text:`Your plan for ${monthName(m)} has not been saved yet. Press "Save my plan" to keep it.`});
+ return n.map(x=>({...x,read:!!store.read[x.id]}));}
+function updateNotifs(){if(!store)return;let u=buildNotifs().filter(x=>!x.read).length;document.querySelectorAll(".nb").forEach(e=>{e.textContent=u;e.classList.toggle("hidden",!u);});if(!$("notifications").classList.contains("hidden"))renderNotifs();}
+function renderNotifs(){if(!store)return;let all=buildNotifs(),f=notifFilter,list=all.filter(x=>f==="all"||x.cat===f),ic={bad:"🔴",warn:"🟠",info:"🔵"};
+ $("notifChips").innerHTML=[["all","All"],["bill","Bills & due dates"],["budget","Budget"],["info","Tips"]].map(([k,l])=>`<button class="chip ${f===k?"on":""}" onclick="setNotifFilter('${k}')">${l} (${k==="all"?all.length:all.filter(x=>x.cat===k).length})</button>`).join("");
+ $("notifList").innerHTML=list.length?list.map(x=>`<div class="notice ${x.lvl} ${x.read?"read":""}"><div><strong>${ic[x.lvl]} ${escapeHtml(x.title)}</strong><small>${escapeHtml(x.text)}</small></div>${x.read?"":`<button class="btn secondary" onclick="markRead('${x.id}')">Mark read</button>`}</div>`).join(""):"<div class='empty'>You're all caught up. No alerts right now.</div>";}
+function setNotifFilter(f){notifFilter=f;renderNotifs();}
+function markRead(id){store.read[id]=1;persist();updateNotifs();renderNotifs();}
+function markAllRead(){buildNotifs().forEach(x=>store.read[x.id]=1);persist();updateNotifs();renderNotifs();}
+function clearExpenses(){if(confirm("Clear all expense entries for this month?")){categories.forEach(([n,k])=>$(k).value=0);calculate();}}
+function deleteAllData(){if(confirm("Delete all of YOUR saved FinWise data (plans, reminders, profile) in this browser? Other accounts are not affected. This cannot be undone.")){store={plans:{},tx:[],goals:[],reminders:[],read:{},profile:{name:user.name,email:user.email}};reminders=store.reminders;persist();loadProfile();loadMonth();renderReminders();}}
+function addReminder(){let name=$("billName").value.trim(),date=$("billDate").value,amount=Number($("billAmount").value)||0;if(!name||!date){alert("Please enter a bill name and due date.");return;}let item={id:Date.now(),name,date,amount,type:$("billType").value,paid:false};reminders.push(item);if(!persist()){reminders=reminders.filter(r=>r.id!==item.id);return;}$("billName").value="";$("billAmount").value="";$("billDate").value="";renderReminders();alert("Bill reminder added successfully.");}
+function renderReminders(){
+ let list=$("reminderList");if(!list)return;if(!reminders.length){list.innerHTML="<div class='empty'>No reminders yet. Add your first payment above.</div>";renderMiniReminders();return;}
+ reminders.sort((a,b)=>a.date.localeCompare(b.date));list.innerHTML=reminders.map(r=>`<div class="reminder"><div><strong>${escapeHtml(r.name)} · ${fmt(r.amount)}</strong><small>${escapeHtml(r.type)} • Due ${r.date}</small></div><div class="actions" style="margin:0"><span class="pill ${r.paid?'paid':''}">${r.paid?'PAID':daysLabel(r.date)}</span><button class="btn secondary" onclick="togglePaid(${r.id})">${r.paid?'Undo':'Mark paid'}</button><button class="btn danger" onclick="removeReminder(${r.id})">×</button></div></div>`).join("");renderMiniReminders();checkDueNotifications();
+}
+function renderMiniReminders(){let box=$("upcomingMini");if(!box)return;let arr=reminders.filter(r=>!r.paid).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);box.innerHTML=arr.length?arr.map(r=>`<div class="reminder"><div><strong>${escapeHtml(r.name)}</strong><small>${r.date} • ${fmt(r.amount)}</small></div><span class="pill">${daysLabel(r.date)}</span></div>`).join(""):"<div class='empty'>No unpaid reminders.</div>";updateNotifs();}
+function daysLabel(date){let days=Math.ceil((new Date(date+"T00:00:00")-new Date(new Date().toDateString()))/86400000);return days<0?`${Math.abs(days)} days overdue`:days===0?"Due today":`In ${days} days`;}
+function togglePaid(id){let r=reminders.find(x=>x.id===id);if(r)r.paid=!r.paid;persist();renderReminders();}
+function removeReminder(id){reminders=reminders.filter(x=>x.id!==id);persist();renderReminders();}
+function enableNotifications(){if(!("Notification"in window)){alert("This browser does not support notifications.");return;}Notification.requestPermission().then(p=>{alert(p==="granted"?"Notifications enabled while this page is open.":"Notification permission was not granted.");checkDueNotifications();});}
+function checkDueNotifications(){if(!("Notification"in window)||Notification.permission!=="granted")return;let today=todayStr();reminders.filter(r=>!r.paid&&r.date<=today&&!sessionStorage.getItem("notified_"+r.id)).forEach(r=>{new Notification("FinWise payment reminder",{body:`${r.name} • ${fmt(r.amount)} • ${r.date}`});sessionStorage.setItem("notified_"+r.id,"1");});}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+let editTx=null;
+const tiles=a=>a.map(([x,y,c])=>`<div class="guideline"><span class="helper">${x}</span><strong class="${c||""}" style="font-size:18px;margin:2px 0 0">${y}</strong></div>`).join("");
+const cName=k=>k==="income"?"Income":(categories.find(c=>c[1]===k)||[k])[0];
+function monthTx(m){return (store.tx||[]).filter(t=>t.date.slice(0,7)===m);}
+function actuals(m){let by={},inc=0,tot=0,l=monthTx(m);categories.forEach(([n,k])=>by[k]=0);l.forEach(t=>{let a=+t.amount||0;if(t.type==="income")inc+=a;else{by[t.cat]=(by[t.cat]||0)+a;tot+=a;}});return{by,inc,tot,count:l.length};}
+function planResult(income,total,balance,rate,nz){let top=nz.slice(0,3);$("planResult").innerHTML=`<div class="stats4">${tiles([["Income",fmt(income),""],["Expenses",fmt(total),""],["Remaining",fmt(balance),balance>=0?"good":"bad"],["Savings rate",rate.toFixed(1)+"%",""]])}</div><div class="kpi-top"><span>Expense-to-income ratio</span><strong>${income?(total/income*100).toFixed(1):0}%</strong></div><div class="progress"><span style="width:${Math.min(100,income?total/income*100:0)}%"></span></div>${top.length?`<p class="helper">Top spending: ${top.map(x=>x.name+" "+fmt(x.value)).join(" • ")}</p>`:""}`+$("healthInsight").outerHTML.replace(/\s?id="healthInsight"/,"");}
+function txTypeChange(){let inc=$("txType").value==="income";$("txCat").innerHTML=inc?'<option value="income">Income</option>':categories.map(([n,k])=>`<option value="${k}">${n}</option>`).join("");}
+function fillFilter(){$("txFilter").innerHTML='<option value="all">All categories</option>'+categories.map(([n,k])=>`<option value="${k}">${n}</option>`).join("")+'<option value="income">Income</option>';}
+function defTxDate(){let m=$("month").value,t=todayStr();if(!editTx)$("txDate").value=m&&t.slice(0,7)!==m?m+"-01":t;}
+function resetTx(){editTx=null;$("txAmt").value="";$("txNote").value="";$("txType").value="expense";txTypeChange();defTxDate();$("txTitle").textContent="Add a transaction";$("txBtn").textContent="Add transaction";$("txCancel").classList.add("hidden");}
+function saveTx(){let amount=+$("txAmt").value,date=$("txDate").value;if(!date||!(amount>0)){alert("Please enter a date and an amount above 0.");return;}
+ let t={id:editTx||Date.now()+Math.floor(Math.random()*1e3),date,type:$("txType").value,cat:$("txCat").value,amount,mode:$("txMode").value,note:$("txNote").value.trim()};
+ store.tx=store.tx||[];if(editTx)store.tx=store.tx.map(x=>x.id===editTx?t:x);else store.tx.push(t);
+ if(!persist())return;let moved=date.slice(0,7)!==$("month").value;resetTx();if(moved)alert("Saved under "+monthName(date.slice(0,7))+". Change the month to view it.");renderTx();calculate();evaluateSmartAlert(true);updateNotifs();}
+function startEdit(id){let t=store.tx.find(x=>x.id===id);if(!t)return;editTx=id;$("txType").value=t.type;txTypeChange();$("txCat").value=t.cat;$("txDate").value=t.date;$("txAmt").value=t.amount;$("txMode").value=t.mode;$("txNote").value=t.note;$("txTitle").textContent="Edit transaction";$("txBtn").textContent="Update transaction";$("txCancel").classList.remove("hidden");window.scrollTo(0,0);}
+function delTx(id){if(confirm("Delete this transaction?")){store.tx=store.tx.filter(x=>x.id!==id);persist();renderTx();calculate();updateNotifs();}}
+function renderTx(){if(!store)return;let m=$("month").value,f=$("txFilter").value,a=actuals(m),list=monthTx(m).filter(t=>f==="all"||t.cat===f).sort((x,y)=>y.date.localeCompare(x.date)||y.id-x.id);
+ $("txSub").textContent=m?monthName(m)+" • "+a.count+" transaction"+(a.count==1?"":"s"):"Choose a month";
+ $("txStats").innerHTML=tiles([["Spent",fmt(a.tot),""],["Income received",fmt(a.inc),""],["Net",fmt(a.inc-a.tot),a.inc-a.tot>=0?"good":"bad"],["Transactions",a.count,""]]);
+ $("txList").innerHTML=list.length?`<table class="table"><tr><th>Date</th><th>Category</th><th>Note</th><th>Via</th><th>Amount</th><th></th></tr>${list.map(t=>`<tr><td>${t.date}</td><td>${cName(t.cat)}</td><td>${escapeHtml(t.note||"-")}</td><td>${escapeHtml(t.mode)}</td><td class="${t.type==="income"?"good":""}">${t.type==="income"?"+":"−"}${fmt(t.amount)}</td><td style="white-space:nowrap"><button class="btn secondary" onclick="startEdit(${t.id})">Edit</button> <button class="btn danger" onclick="delTx(${t.id})">×</button></td></tr>`).join("")}</table>`:"<div class='empty'>No transactions for this month yet. Add your first one above.</div>";}
+function renderCompare(){if(!store)return;let m=$("month").value,p=values(),a=actuals(m),pl=Object.values(p).reduce((x,y)=>x+y,0),pi=(+$("income").value||0)+(+$("otherIncome").value||0),diff=pl-a.tot;
+ $("cmpSub").textContent=(m?monthName(m)+" • ":"")+"Plan = your entries for the month, Actual = your transactions";
+ $("cmpStats").innerHTML=tiles([["Planned spending",fmt(pl),""],["Actual spent",fmt(a.tot),""],[diff>=0?"Budget left":"Over budget",fmt(Math.abs(diff)),diff>=0?"good":"bad"],["Income: plan / actual",fmt(pi)+" / "+fmt(a.inc),""]]);
+ let rows=categories.map(([n,k])=>({n,k,p:p[k],a:a.by[k]||0})).filter(r=>r.p>0||r.a>0).sort((x,y)=>y.a-x.a),over=rows.filter(r=>r.p>0&&r.a>r.p),unb=rows.filter(r=>!r.p&&r.a>0),ins=[];
+ if(over.length)ins.push(["warn","Over budget in "+over.length+" categor"+(over.length>1?"ies":"y"),over.map(r=>r.n+" (+"+fmt(r.a-r.p)+")").join(", ")]);
+ if(unb.length)ins.push(["warn","Spending with no plan",unb.map(r=>r.n).join(", ")+". Add a planned amount for these."]);
+ let now=todayStr();if(m===now.slice(0,7)&&pl>0&&a.tot>0){let d=+now.slice(8),dim=new Date(+m.slice(0,4),+m.slice(5),0).getDate(),proj=a.tot/d*dim;ins.push([proj>pl?"warn":"goodbox","Month-end pace","At this pace you will spend about "+fmt(proj)+" by month end against a plan of "+fmt(pl)+"."]);}
+ if(!ins.length&&a.count)ins.push(["goodbox","On track","No category is over its planned amount."]);
+ $("cmpInsights").innerHTML=ins.map(([c,t,x])=>`<div class="insight ${c}"><strong>${t}</strong>${escapeHtml(x)}</div>`).join("");
+ $("cmpTable").innerHTML=rows.length?`<table class="table"><tr><th>Category</th><th>Planned</th><th>Actual</th><th>Left / Over</th><th>Progress</th></tr>${rows.map(r=>{let pc=r.p?r.a/r.p*100:(r.a?999:0),cl=pc>100?"o":pc>=80?"w":"ok",left=r.p-r.a;return `<tr><td>${r.n}</td><td>${fmt(r.p)}</td><td>${fmt(r.a)}</td><td class="${left>=0?"good":"bad"}">${left>=0?"Left ":"Over "}${fmt(Math.abs(left))}</td><td><div class="bar"><i class="${cl}" style="width:${Math.min(100,pc)}%"></i></div></td></tr>`}).join("")}</table>`:"<div class='empty'>Enter planned amounts and add transactions to compare.</div>";}
+function copyPrev(){let m=$("month").value,k=Object.keys(store.plans).filter(x=>x<m).sort().pop();if(!k){alert("No earlier saved plan found to copy.");return;}if(!confirm("Copy the plan from "+monthName(k)+" into "+monthName(m)+"? Entries on screen will be replaced (not saved until you press Save my plan)."))return;let d=store.plans[k];["income","otherIncome","existingSavings","emergencyTarget"].forEach(x=>$(x).value=d[x]||"");categories.forEach(([n,c])=>$(c).value=d.expenses?.[c]||0);calculate();showSection("budget");}
+
+/* ---------- Smart Financial Guardian ---------- */
+function evaluateSmartAlert(force=false){
+ if(!store||!user)return;let m=$("month").value||todayStr().slice(0,7),d=calculateDataOnly(),tx=actuals(m),spent=tx.count?tx.tot:d.total,balance=d.income-spent,plannedSavings=d.income-d.total,actualRate=d.income?balance/d.income*100:0;
+ if(!d.income)return;let level=balance<0?"critical":(balance<plannedSavings||actualRate<10)?"warning":"good";
+ if(level==="good")return;
+ let key="finwise_alert_"+encodeURIComponent(user.email)+"_"+m+"_"+level;
+ if(!force&&sessionStorage.getItem(key))return;
+ if(sessionStorage.getItem(key))return;
+ sessionStorage.setItem(key,"1");
+ let over=Math.max(0,spent-d.total),suggest=[];
+ if(balance<0)suggest.push("Your expenses are above your income. Pause non-essential purchases and prioritise rent, food, medicines and essential bills.");
+ else suggest.push("Your actual savings are lower than planned. Review flexible spending before the month ends.");
+ let flexible=[ ["shopping","Shopping"],["fun","Entertainment and eating out"],["food","Food and groceries"],["transport","Transport"],["other","Other expenses"] ];
+ let largest=flexible.map(([k,n])=>({k,n,v:d.exp[k]||0})).sort((a,b)=>b.v-a.v).filter(x=>x.v>0).slice(0,2);
+ if(largest.length)suggest.push("Review these higher planned categories first: "+largest.map(x=>x.n+" ("+fmt(x.v)+")").join(" and ")+". Set a weekly limit and track each purchase.");
+ suggest.push("Check subscriptions and recurring payments, compare prices before non-essential purchases, and move a realistic amount to savings after essential bills are covered.");
+ if(over>0)suggest.push("You are approximately "+fmt(over)+" above your planned spending. Revisit the categories where actual transactions exceeded the plan.");
+ $("smartAlertLevel").textContent=level==="critical"?"URGENT • NEGATIVE BALANCE":"LOW SAVINGS • BUDGET WARNING";
+ $("smartAlertTitle").textContent=level==="critical"?"Your expenses exceed your income":"Your savings are below your plan";
+ $("smartAlertBody").innerHTML=`<p>Income: <strong>${fmt(d.income)}</strong><br>Actual spending used for this check: <strong>${fmt(spent)}</strong><br>Remaining balance: <strong class="${balance<0?'bad':'mid'}">${fmt(balance)}</strong><br>Planned savings: <strong>${fmt(plannedSavings)}</strong></p><div class="insight ${level==='critical'?'warn':''}"><strong>FinWise suggestions</strong><ul>${suggest.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul></div><p class="helper">This is a budgeting estimate based on the income, plan and transactions entered for ${monthName(m)}. It is not a judgement or a substitute for essential healthcare or financial advice.</p>`;
+ $("smartAlert").classList.remove("hidden");
+}
+function closeSmartAlert(){$("smartAlert").classList.add("hidden");}
+/* ---------- Goal-based savings ---------- */
+function resetGoalForm(){editingGoal=null;$("goalForm").reset();$("goalId").value="";$("goalSaved").value="0";$("goalSubmit").textContent="Add savings goal";}
+function saveGoal(ev){ev.preventDefault();let name=$("goalName").value.trim(),target=Number($("goalTarget").value),saved=Number($("goalSaved").value)||0,deadline=$("goalDeadline").value;
+ if(!name||!(target>0)||saved<0||!deadline){alert("Please enter a goal name, valid target, saved amount and deadline.");return;}
+ if(saved>target){alert("Already saved amount cannot be greater than the target amount.");return;}
+ let goal={id:editingGoal||Date.now(),name,target,saved,deadline,updatedAt:new Date().toISOString()};store.goals=store.goals||[];
+ if(editingGoal)store.goals=store.goals.map(g=>g.id===editingGoal?goal:g);else store.goals.push(goal);
+ if(!persist())return;resetGoalForm();renderGoals();alert("Savings goal saved successfully.");}
+function editGoal(id){let g=(store.goals||[]).find(x=>x.id===id);if(!g)return;editingGoal=id;$("goalId").value=id;$("goalName").value=g.name;$("goalTarget").value=g.target;$("goalSaved").value=g.saved;$("goalDeadline").value=g.deadline;$("goalSubmit").textContent="Update goal";showSection("goals");window.scrollTo(0,0);}
+function deleteGoal(id){if(!confirm("Delete this savings goal?"))return;store.goals=(store.goals||[]).filter(g=>g.id!==id);if(persist())renderGoals();}
+function renderGoals(){if(!store||!$("goalList"))return;let goals=store.goals||[];if(!goals.length){$("goalList").innerHTML="<div class='empty'>No goals yet. Create your first savings goal.</div>";return;}
+ $("goalList").innerHTML=goals.map(g=>{let pct=Math.min(100,Math.round((g.saved/Math.max(1,g.target))*100)),remaining=Math.max(0,g.target-g.saved),days=Math.ceil((new Date(g.deadline+"T00:00:00")-new Date(todayStr()+"T00:00:00"))/86400000),months=Math.max(1,Math.ceil(Math.max(0,days)/30)),monthly=remaining/months;return `<div class="goal-card"><div class="section-head"><h3>🎯 ${escapeHtml(g.name)}</h3><span class="pill ${pct>=100?'paid':''}">${pct}%</span></div><div class="goal-meta"><span>Saved ${fmt(g.saved)}</span><strong>${fmt(g.target)}</strong></div><div class="progress"><span style="width:${pct}%;background:#24a879"></span></div><div class="goal-meta"><span>${fmt(remaining)} left</span><span>Deadline: ${escapeHtml(g.deadline)}</span></div><p class="helper">${pct>=100?'Goal completed!':days<0?'Deadline passed. Update your deadline if needed.':`Save about ${fmt(monthly)} per month to reach this goal on time.`}</p><div class="actions"><button class="btn secondary" onclick="editGoal(${g.id})">Edit</button><button class="btn danger" onclick="deleteGoal(${g.id})">Delete</button></div></div>`;}).join("");}
+
+fillFilter();txTypeChange();
+buildExpenseFields();document.addEventListener("input",e=>{if(store&&e.target.matches("#income,#otherIncome,#existingSavings,#emergencyTarget,.expense"))calculate();});window.addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
